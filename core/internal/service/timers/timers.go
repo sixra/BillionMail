@@ -5,6 +5,7 @@ import (
 	"billionmail-core/internal/service/collect"
 	"billionmail-core/internal/service/domains"
 	"billionmail-core/internal/service/mail_boxes"
+	"billionmail-core/internal/service/mail_service"
 	"billionmail-core/internal/service/maillog_stat"
 	"billionmail-core/internal/service/relay"
 	"context"
@@ -83,6 +84,13 @@ func Start(ctx context.Context) (err error) {
 		collect.Collect(ctx)
 	})
 
+	// Fix Postfix main configuration and Rspamd DKIM signing config
+	gtimer.AddOnce(5*time.Second, func() {
+		mail_service.FixPostfixMainConfig(ctx)
+		mail_service.FixRspamdDKIMSigningConfig(ctx)
+		mail_service.FixDovecotSSLConfig(ctx)
+	})
+
 	// ========== Mail task processing: one executor per task ==========
 	gtimer.Add(5*time.Second, func() {
 		batch_mail.ProcessEmailTasks(ctx)
@@ -101,6 +109,10 @@ func Start(ctx context.Context) (err error) {
 
 	gtimer.Add(5*time.Minute, func() {
 		relay.UpdateRelayStatus(ctx)
+	})
+
+	gtimer.Add(24*time.Hour, func() {
+		domains.AutoRenewSSL(ctx)
 	})
 
 	g.Log().Debug(ctx, "All timers started successfully")

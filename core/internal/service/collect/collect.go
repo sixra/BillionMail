@@ -20,7 +20,9 @@ func Collect(ctx context.Context) {
 	curTime := time.Now().Unix()
 
 	if lastPostTime == 0 || curTime-lastPostTime > 24*60*60 {
-		lastPostTime = curTime
+		// get 0 clock time of today
+		// If last post time is not set or more than 24 hours ago, reset to current day start
+		lastPostTime = time.Now().Truncate(24 * time.Hour).Unix()
 	}
 
 	defer func() {
@@ -31,7 +33,7 @@ func Collect(ctx context.Context) {
 	var cnt int
 
 	// Get sent total count
-	cnt, _ = g.DB().Model("mailstate_send_mails").Where("log_time > ?", lastPostTime).Count()
+	cnt, _ = g.DB().Model("mailstat_send_mails").Where("log_time > ?", lastPostTime).Count()
 
 	resp, err := g.Client().ContentJson().Post(ctx, apiBase, g.Map{
 		"feature": "bm.sent",

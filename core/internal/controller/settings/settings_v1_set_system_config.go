@@ -41,7 +41,7 @@ func (c *ControllerV1) SetSystemConfig(ctx context.Context, req *v1.SetSystemCon
 		}
 	}
 
-	envMap, err := loadEnvFile()
+	envMap, err := public.LoadEnvFile()
 	if err != nil {
 		res.SetError(gerror.New(public.LangCtx(ctx, "Failed to read environment variable file: {}", err)))
 		return res, nil

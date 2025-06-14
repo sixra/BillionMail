@@ -22,7 +22,7 @@ server:
   cookieDomain: ""
 
   # Sessions Configuration
-  sessionMaxAge: "24h"
+  sessionMaxAge: "30d"
   sessionIdName: "billion_mail"
   sessionCookieOutput: true
   sessionPath: "data/session"
@@ -46,7 +46,7 @@ server:
   dumpRouterMap: false # Whether to print all route lists when the Server starts. Default is true
 
   # Version
-  version: "2.1"
+  version: "2.2"
 
 viewer:
   Paths: ["template"]

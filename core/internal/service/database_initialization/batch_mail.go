@@ -115,6 +115,8 @@ func init() {
                 active SMALLINT NOT NULL DEFAULT 1,
                 create_time INTEGER NOT NULL DEFAULT EXTRACT(EPOCH FROM NOW()),
                 update_time INTEGER NOT NULL DEFAULT EXTRACT(EPOCH FROM NOW()),
+                expire_time INTEGER DEFAULT 0,
+                last_key_update_time INTEGER DEFAULT 0,
                 UNIQUE(api_key)
             )`,
 

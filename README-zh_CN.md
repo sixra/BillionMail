@@ -41,11 +41,10 @@ cd /opt && git clone https://github.com/aaPanel/BillionMail && cd BillionMail &&
 ```
 
 <div align="center">
-  <a href="https://www.youtube.com/embed/UHgxZa_9jGs?si=0-f1B5hDtcWImvQv" target="_blank">
-    <img src="https://img.youtube.com/vi/UHgxZa_9jGs/maxresdefault.jpg" alt="" width="80%">
+  <a href="https://www.bilibili.com/video/BV1JiTNzUE5m/" target="_blank">
+    <img src="https://i1.hdslb.com/bfs/archive/9065dbdf7645fa5cadb8a34e1ae3e287481fb862.jpg" alt="" width="80%">
     <br />
-    <img src="https://www.iconfinder.com/icons/317714/download/png/16" alt="YouTube" width="16"/>
-    <b>在YouTube上观看</b>
+    <b>在BiliBili上观看</b>
   </a>
 </div>
 
@@ -99,7 +98,7 @@ BillionMail是一个**社区驱动的项目**，我们需要您的支持才能�
 
 ## 问题
 
-如果您遇到任何问题或有功能请求，请[提出问题](https://github.com/aaPanel/BillionMail/issues)。请确保包括：
+如果您遇到任何问题或有功能请求，请[提交issue](https://github.com/aaPanel/BillionMail/issues)。请确保包括：
 
 - 问题或请求的清晰描述。
 - 重现问题的步骤（如适用）。

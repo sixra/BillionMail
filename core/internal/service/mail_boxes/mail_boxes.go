@@ -46,6 +46,12 @@ func Update(ctx context.Context, mailbox *v1.Mailbox) (err error) {
 	mailbox.UpdateTime = time.Now().Unix()
 	if mailbox.Password != "" {
 		mailbox.PasswordEncode = PasswdEncode(ctx, mailbox.Password)
+		mailbox.Password, err = PasswdMD5Crypt(ctx, mailbox.Password)
+
+		if err != nil {
+			err = fmt.Errorf("Generate password md5-crypt failed: %w", err)
+			return
+		}
 	}
 
 	mailbox.Username = strings.ToLower(mailbox.Username)

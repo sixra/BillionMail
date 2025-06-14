@@ -2574,3 +2574,33 @@ func AddUnsubscribeButton(content string) string {
 func FormatMX(domain string) string {
 	return "mail." + strings.TrimPrefix(domain, "mail.")
 }
+
+// loadEnvFile .env
+func LoadEnvFile() (map[string]string, error) {
+	envPath := AbsPath("../.env")
+	content, err := os.ReadFile(envPath)
+	if err != nil {
+		return nil, err
+	}
+
+	envMap := make(map[string]string)
+	lines := strings.Split(string(content), "\n")
+
+	for _, line := range lines {
+		line = strings.TrimSpace(line)
+		if line == "" || strings.HasPrefix(line, "#") {
+			continue
+		}
+
+		parts := strings.SplitN(line, "=", 2)
+		if len(parts) != 2 {
+			continue
+		}
+
+		key := strings.TrimSpace(parts[0])
+		value := strings.Trim(strings.TrimSpace(parts[1]), `"'`)
+		envMap[key] = value
+	}
+
+	return envMap, nil
+}
